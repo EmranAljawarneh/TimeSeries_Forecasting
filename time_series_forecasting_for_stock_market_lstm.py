@@ -116,19 +116,6 @@ plt.ylabel("Scores")
 plt.legend(["MSE", "RMSE", "MAE"])
 plt.show()
 
-"""# Convert the Time stamp into Time Format"""
-
-print(lstm_prediction)
-
-exp_lstm_prediction = np.exp(lstm_prediction)
-print(exp_lstm_prediction)
-
-exp_y_test = np.exp(y_test)
-print(exp_y_test)
-
-for i in exp_lstm_prediction:
- print(pd.to_datetime(i, unit='s'))
-
 """# Test Stock Market"""
 
 testcolumns = ['Open', 'High', 'Low', 'Close', 'Volume']
