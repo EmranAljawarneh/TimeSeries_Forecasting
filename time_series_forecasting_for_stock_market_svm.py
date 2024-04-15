@@ -13,7 +13,7 @@ columns = ['SecuritiesCode', 'Open', 'High', 'Low', 'Close', 'Volume', 'Disclose
 data = pd.read_csv('Stock_Market.csv', usecols=columns)
 data.shape
 
-# Non-Stationary TimeSeries
+# Non-Stationary TimeSeries test using visualization
 aaa=['Open', 'High', 'Low', 'Close', 'Volume']
 plt.plot(data[aaa])
 plt.xlabel('\n Number of observations')
@@ -29,7 +29,7 @@ var1, var2 = X1.var(), X2.var()
 print('mean1=%f, mean2=%f' % (mean1, mean2))
 print('variance1=%f, variance2=%f' % (var1, var2))
 
-# Stationary TimeSeries
+# Stationary TimeSeries test using visualization
 aaa=['Open', 'High', 'Low', 'Close']
 log_data = np.log(data)   # log() == loge()
 plt.plot(log_data['Open'], 'b')
