@@ -1,0 +1,21 @@
+# Build the SVR model
+svr = SVR(kernel='rbf', C=100, epsilon=100.0)
+svr_fit = svr.fit(X_train, y_train)
+svr_prediction = svr.predict(X_test)
+print(len(svr_prediction))
+
+# Evaluate the model 
+MSE = round(mean_squared_error(y_test, svr_prediction), 9)
+RMSE = round(mean_squared_error(y_test, svr_prediction, squared=False), 9)
+MAE = round(mean_absolute_error(y_test, svr_prediction), 9)
+
+x = np.arange(1)
+plt.bar(x-0.2, MSE, width=0.1, color='red')
+plt.bar(x, RMSE, width=0.1, color='orange')
+plt.bar(x+0.2, MAE, width=0.1, color='blue')
+
+plt.xticks(x, ['MSE', 'RMSE'])
+plt.xlabel("Metrics")
+plt.ylabel("Scores")
+plt.legend(["MSE", "RMSE", "MAE"])
+plt.show()
