@@ -45,9 +45,10 @@ between the groups, the time series is likely non-stationary.
 
 A big difference between the mean and variance as shown in the original data 
 indicates that the data is non-stationary. To make it stationary, we applied the natural 
-logarithm to the data. Fig. 2 and Fig. 3 present the behavior of the data before and after the 
+logarithm to the data. Fig. 2 and Fig. 3 "Dataset Distribution" and "Transformed Dataset" present the behavior of the data before and after the 
 stationary test. Fig. 3 shows the suitable format that is accepted by the model.
-![Screenshot (8605)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/1d4945d1-06cd-4625-a230-eabd6532db92) ![Screenshot (8603)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/65fca8ac-78eb-44b9-81e1-75fe256c68e8)
+
+![Screenshot (8605)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/1d4945d1-06cd-4625-a230-eabd6532db92)![Screenshot (8603)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/65fca8ac-78eb-44b9-81e1-75fe256c68e8)
 
 # SVM Experiments
 To identify the optimal hyperparameters for the Support Vector Regression (SVR) 
