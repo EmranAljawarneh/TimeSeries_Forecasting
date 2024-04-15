@@ -41,4 +41,31 @@ This involves splitting the time series into two or more partitions and comparin
 and variance of each group. If the means and variances differ significantly 
 between the groups, the time series is likely non-stationary.
 
-![Screenshot (8601)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/30be8cef-69ee-4fe5-bda1-17571abff631)
+![Screenshot (8602)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/5176946d-8fb3-4f19-bf5b-a2ba836e9269)
+
+A big difference between the mean and variance as shown in the original data 
+indicates that the data is non-stationary. To make it stationary, we applied the natural 
+logarithm to the data. Fig. 2 and Fig. 3 present the behavior of the data before and after the 
+stationary test. Fig. 3 shows the suitable format that is accepted by the model.
+![Screenshot (8605)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/1d4945d1-06cd-4625-a230-eabd6532db92)
+![Screenshot (8603)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/65fca8ac-78eb-44b9-81e1-75fe256c68e8)
+
+# SVM Experiments
+To identify the optimal hyperparameters for the Support Vector Regression (SVR) 
+model. Various experiments were conducted to determine the optimal statistical model 
+with the lowest error. The values of ”C” and ”ϵ” were investigated by experimenting with 
+different values of ”C” and ”ϵ” while the kernel function remained fixed at the RBF 
+function. Based on the evaluation metrics we got, it was found that ”C” = 
+100 and,”ϵ” = 0.0005 provided the smallest error. To confirm that these values 
+were indeed optimal, additional experiments were conducted with different values of ”C” 
+while ”ϵ” was fixed at 0.0005.
+
+# LSTM Experiments
+Two experiments were conducted in this study, one with and one without the dropout
+technique, using different numbers of neurons, namely 4, 45, 50, 55, 123, 128, and 133. 
+The LSTM model with dropout technique outperformed the LSTM without dropout, as 
+evidenced by the lower MSE, RMSE, and MAE metrics with values of 0.000124763, 
+0.011169727, and 0.009058733. A comparison between the 
+The LSTM model outperformed the SVR model by producing the 
+best results, with an MSE of 0.000124763, an RMSE of 0.011169727, and an MAE of 
+0.009058733.
