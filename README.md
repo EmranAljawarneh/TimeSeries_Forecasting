@@ -48,8 +48,8 @@ indicates that the data is non-stationary. To make it stationary, we applied the
 logarithm to the data. Fig. 2 and Fig. 3 "Dataset Distribution" and "Transformed Dataset" present the behavior of the data before and after the 
 stationary test. Fig. 3 shows the suitable format that is accepted by the model.
 
-![Screenshot (8611)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/735bc6a5-e12b-489b-9ca6-b334e8737d18)
 ![Screenshot (8603)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/65fca8ac-78eb-44b9-81e1-75fe256c68e8)
+![Screenshot (8611)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/735bc6a5-e12b-489b-9ca6-b334e8737d18)
 
 # SVM Experiments
 To identify the optimal hyperparameters for the Support Vector Regression (SVR) 
