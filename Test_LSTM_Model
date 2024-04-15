@@ -1,0 +1,35 @@
+"""# Test Stock Market"""
+
+testcolumns = ['Open', 'High', 'Low', 'Close', 'Volume']
+testdata = pd.read_csv('test_stock_prices.csv', usecols=testcolumns)
+testdata.shape
+
+log_testdata = np.log(testdata)   # log() == loge()
+plt.plot(log_testdata)
+plt.show()
+
+print(log_testdata.columns)
+
+log_testdata = log_testdata.replace([np.inf, -np.inf], np.nan)
+log_testdata = log_testdata.fillna(log_data.mean())
+
+MinMax_Scaler = MinMaxScaler()
+MinMax_feature_transform = MinMax_Scaler.fit_transform(log_testdata, range(0, 1))
+#MinMax_feature_transform = pd.DataFrame(MinMax_feature_transform, columns=log_testdata.columns, index=log_testdata.index)
+
+test_data = MinMax_feature_transform.reshape(log_testdata.shape[0], 1, log_testdata.shape[1])
+print(test_data.shape)
+
+test_lstm_prediction = model.predict(test_data)
+print(len(test_lstm_prediction))
+
+print(test_lstm_prediction)
+
+test_lstm_prediction = np.exp(test_lstm_prediction)
+print(test_lstm_prediction)
+
+x = 0
+for i in test_lstm_prediction:
+  print(pd.to_datetime(i, unit='s'))
+  x=x+1
+print(x)
