@@ -1,8 +1,15 @@
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVR
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+import tensorflow as tf
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-from sklearn.preprocessing import MinMaxScaler
 
 """# Reading the required files"""
 
@@ -11,16 +18,42 @@ data = pd.read_csv('Stock_Market.csv', usecols=columns)
 
 data.shape
 
-# plt.plot(data)
-# plt.show()
+# Non-Stationary TimeSeries
+aaa=['Open', 'High', 'Low', 'Close', 'Volume']
+plt.plot(data[aaa])
+plt.xlabel('\n Number of observations')
+plt.ylabel('\n Feature valules')
+plt.show()
 
-log_data = np.log(data)
-# plt.plot(log_data)
-# plt.show()
+# Stationary Test using Summary Statistics
+X = data.values
+split = round(len(X) / 2)
+X1, X2 = X[0:split], X[split:]
+mean1, mean2 = X1.mean(), X2.mean()
+var1, var2 = X1.var(), X2.var()
+print('mean1=%f, mean2=%f' % (mean1, mean2))
+print('variance1=%f, variance2=%f' % (var1, var2))
+
+# Stationary TimeSeries
+aaa=['Open', 'High', 'Low', 'Close']
+log_data = np.log(data)   # log() == loge()
+plt.plot(log_data['Open'], 'b')
+plt.xlabel('\n Number of observations')
+plt.ylabel('\n Feature valules')
+plt.show()
 
 log_data = log_data.replace([np.inf, -np.inf], np.nan)
 log_data = log_data.fillna(log_data.mean())
 
+# Stationary Test using Summary Statistics
+X = log_data.values
+X = np.log(X)
+split = round(len(X) / 2)
+X1, X2 = X[0:split], X[split:]
+mean1, mean2 = X1.mean(), X2.mean()
+var1, var2 = X1.var(), X2.var()
+print('mean1=%f, mean2=%f' % (mean1, mean2))
+print('variance1=%f, variance2=%f' % (var1, var2))
 Target_data = log_data['DisclosedUnixTime']
 Train_data = log_data.drop(labels=['DisclosedUnixTime', 'SecuritiesCode'], axis=1)
 
@@ -30,7 +63,6 @@ MinMax_Scaler = MinMaxScaler()
 MinMax_feature_transform = MinMax_Scaler.fit_transform(Train_data, range(0, 1))
 #MinMax_feature_transform = pd.DataFrame(MinMax_feature_transform, columns=Train_data.columns, index=Train_data.index)
 
-from sklearn.model_selection import TimeSeriesSplit
 timesplit= TimeSeriesSplit(n_splits=10)
 for train_index, test_index in timesplit.split(MinMax_feature_transform):
         X_train, X_test = MinMax_feature_transform[:len(train_index)], MinMax_feature_transform[len(train_index): (len(train_index)+len(test_index))]
@@ -38,19 +70,11 @@ for train_index, test_index in timesplit.split(MinMax_feature_transform):
 
 """# train_test_split method"""
 
-from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(Train_data, Target_data, test_size=0.3, random_state=0)
 
 print(y_train.shape, X_train.shape, X_test.shape, y_test.shape)
 
 """# LSTM"""
-
-import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
-
-from sklearn.metrics import mean_squared_error
 
 # fix random seed for reproducibility
 tf.random.set_seed(7)
@@ -82,18 +106,9 @@ MSE = round(mean_squared_error(y_test, lstm_prediction), 9)
 RMSE = round(mean_squared_error(y_test, lstm_prediction, squared=False), 9)
 MAE = round(mean_absolute_error(y_test, lstm_prediction), 9)
 
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-'''print('MSE: ', mean_squared_error(y_test, lstm_prediction))
-print('RMSE: ', mean_squared_error(y_test, lstm_prediction, squared=False))
-print('MAE', mean_absolute_error(y_test, lstm_prediction))'''
-
 print('MSE: ', MSE)
 print('RMSE: ', RMSE)
 print('MAE', MAE)
-
-MSE = mean_squared_error(y_test, lstm_prediction)
-RMSE = mean_squared_error(y_test, lstm_prediction, squared=False)
-MAE = mean_absolute_error(y_test, lstm_prediction)
 
 x = np.arange(1)
 plt.bar(x-0.2, MSE, width=0.1, color='red')
