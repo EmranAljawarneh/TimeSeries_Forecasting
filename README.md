@@ -70,3 +70,5 @@ evidenced by the lower MSE, RMSE, and MAE metrics with values of 0.000124763,
 The LSTM model outperformed the SVR model by producing the 
 best results, with an MSE of 0.000124763, an RMSE of 0.011169727, and an MAE of 
 0.009058733.
+
+![Screenshot (8607)](https://github.com/EmranAljawarneh/TimeSeriesForecasting/assets/44652088/e5dd48e0-e2b8-46e9-bab8-519edf433090)
