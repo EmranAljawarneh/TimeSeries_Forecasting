@@ -1,0 +1,30 @@
+"""# Test Stock Price"""
+
+testcolumns = ['SecuritiesCode', 'Open', 'High', 'Low', 'Close', 'Volume']
+testdata = pd.read_csv('test_stock_prices.csv', usecols=testcolumns)
+testdata.shape
+
+log_testdata = np.log(testdata)   # log() == loge()
+plt.plot(log_testdata)
+plt.show()
+
+log_testdata = log_testdata.replace([np.inf, -np.inf], np.nan)
+log_testdata = log_testdata.fillna(log_data.mean())
+
+Std_Scaler = StandardScaler()
+Std_feature_transform = Std_Scaler.fit_transform(log_testdata)
+Std_feature_transform = pd.DataFrame(Std_feature_transform, columns=log_testdata.columns, index=log_testdata.index)
+
+test_svr_prediction = svr.predict(Std_feature_transform)
+print(len(test_svr_prediction))
+
+print(test_svr_prediction)
+
+test_svr_prediction = np.exp(test_svr_prediction)
+print(test_svr_prediction)
+
+x = 0
+for i in test_svr_prediction:
+  print(pd.Timestamp(i, unit='s'))
+  x=x+1
+print(x)
