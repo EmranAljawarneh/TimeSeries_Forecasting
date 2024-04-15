@@ -73,11 +73,6 @@ MSE = round(mean_squared_error(y_test, svr_prediction), 9)
 RMSE = round(mean_squared_error(y_test, svr_prediction, squared=False), 9)
 MAE = round(mean_absolute_error(y_test, svr_prediction), 9)
 
-print(svr_prediction)
-
-exp_svr_prediction = np.exp(svr_prediction)
-print(exp_svr_prediction)
-
 x = np.arange(1)
 plt.bar(x-0.2, MSE, width=0.1, color='red')
 plt.bar(x, RMSE, width=0.1, color='orange')
