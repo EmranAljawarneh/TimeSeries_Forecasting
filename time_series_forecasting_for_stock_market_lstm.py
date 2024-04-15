@@ -106,34 +106,6 @@ plt.ylabel("Scores")
 plt.legend(["MSE", "RMSE", "MAE"])
 plt.show()
 
-"""# Confusion Matrix"""
-
-print(len(lstm_prediction))
-print(lstm_prediction)
-
-print(len(y_test))
-print(y_test)
-
-from sklearn.preprocessing import Binarizer
-lstm_prediction_reshaped = lstm_prediction.reshape(1, -1)
-y_test_reshaped = y_test.reshape(1, -1)
-
-binarizer_1 = Binarizer()
-binarizer_2 = Binarizer()
-
-lstm_prediction_binarizer = binarizer_1.fit_transform(lstm_prediction_reshaped)
-y_test_binarizer = binarizer_2.fit_transform(y_test_reshaped)
-
-print("Binarized svr prediction : \n", lstm_prediction_binarizer)
-print("\nBinarized y_test : \n", y_test_binarizer)
-
-from sklearn.metrics import classification_report
-print(classification_report(y_test_binarizer, lstm_prediction_binarizer))
-
-from sklearn.metrics import precision_score, recall_score
-print('Precesion: ', precision_score(y_test_binarizer, lstm_prediction_binarizer, average='weighted'))
-print('Recall: ', recall_score(y_test_binarizer, lstm_prediction_binarizer, average='weighted'))
-
 """# Convert the Time stamp into Time Format"""
 
 print(lstm_prediction)
