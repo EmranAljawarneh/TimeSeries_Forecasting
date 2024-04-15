@@ -1,0 +1,9 @@
+# Prepare data for SVR model
+Std_Scaler = StandardScaler()
+Std_feature_transform = Std_Scaler.fit_transform(Train_data)
+
+# Split the data
+timesplit= TimeSeriesSplit(n_splits=10)
+for train_index, test_index in timesplit.split(Std_feature_transform):
+        X_train, X_test = Std_feature_transform[:len(train_index)], Std_feature_transform[len(train_index): (len(train_index)+len(test_index))]
+        y_train, y_test = Target_data[:len(train_index)].values.ravel(), Target_data[len(train_index): (len(train_index)+len(test_index))].values.ravel()
