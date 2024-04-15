@@ -1,0 +1,46 @@
+"""# LSTM"""
+
+# fix random seed for reproducibility
+tf.random.set_seed(7)
+
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+#Process the data for LSTM
+trainX =np.array(X_train)
+testX =np.array(X_test)
+X_train = trainX.reshape(X_train.shape[0], 1, X_train.shape[1])
+X_test = testX.reshape(X_test.shape[0], 1, X_test.shape[1])
+
+trainY =np.array(y_train)
+
+#Building the LSTM Model
+model = Sequential()
+# 45, 55, 123, 132
+model.add(LSTM(units=50, input_shape=(1, trainX.shape[1]), activation='relu', return_sequences=False))
+#model.add(LSTM(units=50, dropout=0.2, input_shape=(1, trainX.shape[1]), activation='relu', return_sequences=False))
+model.add(Dense(1))
+model.compile(loss='mean_squared_error', optimizer='adamax')
+
+history = model.fit(X_train, y_train, epochs=100, batch_size=1)
+
+lstm_prediction = model.predict(X_test)
+print(len(lstm_prediction))
+
+MSE = round(mean_squared_error(y_test, lstm_prediction), 9)
+RMSE = round(mean_squared_error(y_test, lstm_prediction, squared=False), 9)
+MAE = round(mean_absolute_error(y_test, lstm_prediction), 9)
+
+print('MSE: ', MSE)
+print('RMSE: ', RMSE)
+print('MAE', MAE)
+
+x = np.arange(1)
+plt.bar(x-0.2, MSE, width=0.1, color='red')
+plt.bar(x, RMSE, width=0.1, color='orange')
+plt.bar(x+0.2, MAE, width=0.1, color='blue')
+
+plt.xticks(x, ['MSE', 'RMSE'])
+plt.xlabel("Metrics")
+plt.ylabel("Scores")
+plt.legend(["MSE", "RMSE", "MAE"])
+plt.show()
