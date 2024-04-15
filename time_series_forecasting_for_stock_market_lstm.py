@@ -63,16 +63,11 @@ MinMax_Scaler = MinMaxScaler()
 MinMax_feature_transform = MinMax_Scaler.fit_transform(Train_data, range(0, 1))
 #MinMax_feature_transform = pd.DataFrame(MinMax_feature_transform, columns=Train_data.columns, index=Train_data.index)
 
+# Split the data
 timesplit= TimeSeriesSplit(n_splits=10)
 for train_index, test_index in timesplit.split(MinMax_feature_transform):
         X_train, X_test = MinMax_feature_transform[:len(train_index)], MinMax_feature_transform[len(train_index): (len(train_index)+len(test_index))]
         y_train, y_test = Target_data[:len(train_index)].values.ravel(), Target_data[len(train_index): (len(train_index)+len(test_index))].values.ravel()
-
-"""# train_test_split method"""
-
-X_train, X_test, y_train, y_test = train_test_split(Train_data, Target_data, test_size=0.3, random_state=0)
-
-print(y_train.shape, X_train.shape, X_test.shape, y_test.shape)
 
 """# LSTM"""
 
