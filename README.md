@@ -13,8 +13,10 @@ stock indexes, and cryptocurrency prices. We use a publicly available
 dataset of Japanese stocks and options to train and test Support Vector Regression 
 (SVR) and Long Short-Term Memory (LSTM) models. The goal is 
 to improve trading strategies by identifying the best times to buy and sell assets 
-based on predictive models. The performance of the model are compared using 
+based on predictive models. The performance of the model is compared using 
 three accuracy measurements: Mean Squared Error (MSE), Root Mean Squared 
 Error (RMSE), and Mean Absolute Error (MAE). The study has shown that The 
 LSTM with dropout technique provided the best possible results with MSE 
 0.000124763, RMSE 0.011169727, and MAE 0.009058733.
+
+The dataset we used shown in this link: https://www.kaggle.com/competitions/jpx-tokyo-stock-exchange-prediction/data
